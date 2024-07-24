@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Settings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px;
+      user-select: none;
+      -webkit-app-region: drag;
+      width: 180px;
+      height: 80px;
+      overflow: hidden;
+    }
+    input, button {
+      -webkit-app-region: no-drag;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="username"></div>
+  <input type="text" id="newUsername" placeholder="New Username">
+  <button onclick="updateUsername()">Update</button>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    function updateUsername() {
+      const newUsername = document.getElementById('newUsername').value;
+      if (newUsername) {
+        ipcRenderer.send('update-username', newUsername);
+        document.getElementById('newUsername').value = '';
+      }
+    }
+
+    ipcRenderer.on('update-username', (event, username) => {
+      document.getElementById('username').textContent = `Current: ${username}`;
+    });
+  </script>
+</body>
+</html>

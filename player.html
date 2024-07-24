@@ -1,22 +1,194 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Player</title>
+  <title>Player Profile</title>
   <style>
-    body {
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 10px;
-      user-select: none;
-      -webkit-app-region: drag;
-      width: 180px;
-      height: 80px;
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    #profile-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    #header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    #avatar {
+      width: 70px;
+      height: 70px;
+      margin-right: 15px;
+      z-index: 2;
+    }
+    #namecard {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    #namecard-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #username {
+      font-size: 24px;
+      font-weight: bold;
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+    #endorsement {
+      width: 40px;
+      height: 40px;
+      margin-left: 15px;
+    }
+    #ranks {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+    }
+    .rank-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .rank-icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 80px;
+      height: 120px;
+    }
+    .role-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+      z-index: 3;
+    }
+    .rank-icon {
+      width: 70px;
+      height: 70px;
+      z-index: 2;
+    }
+    .tier-icon {
+      width: 60px;
+      height: 60px;
+      margin-top: 5px;
+      z-index: 1;
+    }
+    #input-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    #username-input {
+      padding: 5px;
+      margin-right: 5px;
+    }
+    #submit-button {
+      padding: 5px 10px;
     }
   </style>
 </head>
 <body>
-  <h3>Player</h3>
+  <div id="profile-container">
+    <div id="header">
+      <img id="namecard" src="" alt="Namecard">
+      <img id="avatar" src="" alt="Avatar">
+      <div id="namecard-text">
+        <div id="username"></div>
+        <img id="endorsement" src="" alt="Endorsement">
+      </div>
+    </div>
+    <div id="ranks"></div>
+    <div id="input-container">
+      <input type="text" id="username-input" placeholder="Enter BattleTag (e.g., WarpWing#1790)">
+      <button id="submit-button">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    const tankIcon = "https://i.imgur.com/k7SRm8Y.png";
+    const dpsIcon = "https://i.imgur.com/D9Q11xk.png";
+    const supportIcon = "https://i.imgur.com/RGaK5ya.png";
+
+    function getRoleIcon(role) {
+      switch (role) {
+        case 'tank': return tankIcon;
+        case 'damage': return dpsIcon;
+        case 'support': return supportIcon;
+        default: return null;
+      }
+    }
+
+    function renderRankInfo(roleData, role) {
+      if (!roleData) return '';
+      return `
+        <div class="rank-info">
+          <div class="rank-icon-container">
+            <img class="role-icon" src="${getRoleIcon(role)}" alt="${role} icon">
+            <img class="rank-icon" src="${roleData.rank_icon}" alt="${role} rank">
+            <img class="tier-icon" src="${roleData.tier_icon}" alt="${role} tier">
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById('submit-button').addEventListener('click', () => {
+      const username = document.getElementById('username-input').value;
+      if (username) {
+        ipcRenderer.send('submit-username', username);
+      }
+    });
+
+    ipcRenderer.on('player-data', (event, data) => {
+      document.getElementById('input-container').style.display = 'none';
+      document.getElementById('avatar').src = data.avatar;
+      document.getElementById('namecard').src = data.namecard;
+      const username = data.username.split('#')[0];
+      document.getElementById('username').textContent = username;
+      document.getElementById('endorsement').src = data.endorsement.frame;
+      
+      const ranksHtml = ['tank', 'damage', 'support']
+        .map(role => renderRankInfo(data.competitive.pc[role], role))
+        .join('');
+      document.getElementById('ranks').innerHTML = ranksHtml;
+
+      document.getElementById('profile-container').style.display = 'flex';
+    });
+
+    ipcRenderer.on('player-data-error', (event, error) => {
+      document.getElementById('username').textContent = 'Error: ' + error;
+      document.getElementById('input-container').style.display = 'block';
+      document.getElementById('profile-container').style.display = 'none';
+    });
+  </script>
 </body>
 </html>
