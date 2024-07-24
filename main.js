@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, globalShortcut, ipcMain, screen, Notification } = require('electron');
+const { app, BrowserWindow, Tray, globalShortcut, screen, Notification } = require('electron');
 const path = require('path');
 
 let tray;
@@ -65,7 +65,7 @@ app.whenReady().then(() => {
   createWindows();
 
   tray = new Tray(path.join(__dirname, 'icon.png'));
-  tray.setToolTip('Overlay App');
+  tray.setToolTip('TankWatch');
 
   tray.on('click', toggleWindows);
 
@@ -76,14 +76,13 @@ app.whenReady().then(() => {
   });
 
   // Show notification
-  new Notification({ title: 'Overlay App', body: 'Started' }).show();
+  new Notification({ 
+    title: 'TankWatch', 
+    body: 'Started',
+    silent: true // This prevents the default notification sound
+  }).show();
 });
 
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();
-});
-
-ipcMain.on('resize-window', (event, { width, height, windowName }) => {
-  const win = windowName === 'player' ? playerWindow : tankWindow;
-  win.setSize(width, height);
 });
