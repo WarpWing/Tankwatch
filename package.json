@@ -1,0 +1,22 @@
+{
+  "name": "tankwatch",
+  "version": "1.0.0",
+  "description": "An Overwatch 2 app designed to primarily track counterpicks",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/WarpWing/Tankwatch.git"
+  },
+  "author": "Ty Chermsirivatana",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/WarpWing/Tankwatch/issues"
+  },
+  "homepage": "https://github.com/WarpWing/Tankwatch#readme",
+  "devDependencies": {
+    "electron": "^31.2.1"
+  }
+}
