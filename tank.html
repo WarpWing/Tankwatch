@@ -10,24 +10,13 @@
       padding: 10px;
       user-select: none;
       -webkit-app-region: drag;
-    }
-    input {
-      -webkit-app-region: no-drag;
+      width: 180px;
+      height: 80px;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
   <h3>Tank</h3>
-  <input type="number" id="width" placeholder="Width">
-  <input type="number" id="height" placeholder="Height">
-  <button onclick="resizeWindow()">Resize</button>
-  <script>
-    const { ipcRenderer } = require('electron');
-    function resizeWindow() {
-      const width = document.getElementById('width').value;
-      const height = document.getElementById('height').value;
-      ipcRenderer.send('resize-window', { width, height, windowName: 'tank' });
-    }
-  </script>
 </body>
 </html>
