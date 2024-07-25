@@ -1,0 +1,90 @@
+{
+    "D.Va": {
+      "FREELO": [],
+      "Winning": ["Mauga", "Wrecking Ball"],
+      "Neutral": ["D.Va"],
+      "Losing": ["Sigma", "Winston", "Junker Queen", "Roadhog", "Doomfist", "Orisa", "Rein"],
+      "SWAP": ["Ramattra", "Zarya"]
+    },
+    "Doomfist": {
+      "FREELO": ["Rammatra", "Wrecking Ball"],
+      "Winning": ["D.Va", "Junker Queen", "Zarya", "Sigma"],
+      "Neutral": ["Doomfist", "Winston", "Reinhardt"],
+      "Losing": ["Roadhog", "Orisa"],
+      "SWAP": ["Mauga"]
+    },
+    "Junker Queen": {
+      "FREELO": ["Wrecking Ball", "Winston"],
+      "Winning": ["D.Va"],
+      "Neutral": ["Junker Queen"],
+      "Losing": ["Sigma", "Roadhog", "Doomfist", "Ramattra", "Orisa", "Mauga"],
+      "SWAP": ["Reinhardt", "Zarya"]
+    },
+    "Mauga": {
+      "FREELO": ["Winston", "Wrecking Ball", "Junker Queen", "Roadhog", "Doomfist", "Ramattra", "Reinhardt", "Zarya"],
+      "Winning": [],
+      "Neutral": ["Mauga"],
+      "Losing": ["D.Va", "Sigma", "Orisa"],
+      "SWAP": []
+    },
+    "Orisa": {
+      "FREELO": ["Reinhardt"],
+      "Winning": ["Doomfist", "Roadhog", "D.Va", "Mauga", "Ramattra", "Junker Queen"],
+      "Neutral": ["Orisa"],
+      "Losing": ["Wrecking Ball", "Sigma"],
+      "SWAP": ["Winston", "Zarya"]
+    },
+    "Ramattra": {
+      "FREELO": ["D.Va", "Sigma"],
+      "Winning": ["Reinhardt", "Junker Queen", "Zarya"],
+      "Neutral": ["Ramattra", "Roadhog", "Wrecking Ball", "Winston"],
+      "Losing": ["Orisa", "Doomfist"],
+      "SWAP": ["Mauga"]
+    },
+    "Reinhardt": {
+      "FREELO": ["Junker Queen", "Sigma"],
+      "Winning": ["D.Va"],
+      "Neutral": ["Reinhardt", "Doomfist", "Winston", "Zarya", "Wrecking Ball"],
+      "Losing": ["Ramattra", "Roadhog"],
+      "SWAP": ["Mauga", "Orisa"]
+    },
+    "Roadhog": {
+      "FREELO": ["Winston"],
+      "Winning": ["Reinhardt", "Junker Queen", "Wrecking Ball", "D.Va", "Doomfist"],
+      "Neutral": ["Roadhog", "Ramattra", "Sigma", "Zarya"],
+      "Losing": ["Orisa"],
+      "SWAP": ["Mauga"]
+    },
+    "Sigma": {
+      "FREELO": [],
+      "Winning": ["Orisa", "Junker Queen", "Doomfist", "D.Va"],
+      "Neutral": ["Sigma", "Roadhog", "Zarya", "Wrecking Ball"],
+      "Losing": ["Reinhardt", "Doomfist", "Winston"],
+      "SWAP": ["Ramattra"]
+    },
+    "Winston": {
+      "FREELO": ["Orisa", "Zarya"],
+      "Winning": ["D.Va", "Sigma"],
+      "Neutral": ["Winston", "Doomfist", "Reinhardt", "Ramattra", "Wrecking Ball"],
+      "Losing": ["Junker Queen", "Roadhog"],
+      "SWAP": ["Mauga"]
+    },
+    "Wrecking Ball": {
+      "FREELO": [],
+      "Winning": [],
+      "Neutral": ["Wrecking Ball", "Zarya", "Sigma", "Winston", "Reinhardt", "Ramattra", "Orisa"],
+      "Losing": ["Junker Queen", "Mauga", "Roadhog", "D.Va"],
+      "SWAP": ["Doom"]
+    },
+    "Zarya": {
+      "FREELO": ["Junker Queen", "D.Va", "Orisa"],
+      "Winning": [],
+      "WinningCharge": ["Sigma", "Reinhardt", "Ramattra"],
+      "Neutral": ["Zarya", "Wrecking Ball", "Doomfist", "Sigma", "Reinhardt"],
+      "NeutralCharge": ["Zarya", "Wrecking Ball", "Roadhog", "Mauga", "Doomfist"],
+      "Losing": ["Mauga", "Roadhog", "Ramattra"],
+      "LosingCharge": ["Winston"],
+      "SWAP": ["Winston"],
+      "SWAPCharge": []
+    }
+  }
